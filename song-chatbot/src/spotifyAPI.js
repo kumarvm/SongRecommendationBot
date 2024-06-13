@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const SPOTIFY_CLIENT_ID = '9c90ab47a743489dbfef24be7d7a88ed';
-const SPOTIFY_CLIENT_SECRET = '1f13ed6b307c459a95194e39692fcf8a';
+const SPOTIFY_CLIENT_ID = 'your client ID';
+const SPOTIFY_CLIENT_SECRET = 'your client secret';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
 const SPOTIFY_SEARCH_URL = 'https://api.spotify.com/v1/search';
 const SPOTIFY_RECOMMENDATIONS_URL = 'https://api.spotify.com/v1/recommendations';
