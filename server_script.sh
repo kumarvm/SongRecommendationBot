@@ -5,4 +5,4 @@ python3 PopulateSongsDB.py
 make clean
 make Chatbot
 
-node server.js
+node server/server.js
