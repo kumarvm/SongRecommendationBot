@@ -6,6 +6,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get('/run', (req, res) => {
+    res.send("Hello World!");
+});
+
 app.post('/run', (req, res) => {
     const {track, artist} = req.body;
     if(!track || !artist) {
