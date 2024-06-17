@@ -45,7 +45,7 @@ function App() {
 
       setResponse("Recommending...");
       if (typeRec === "Same") {
-        const res = await axios.post("https://songrecommendationbotserver.onrender.com/run", {track, artist, typeRec});
+        const res = await axios.post("https://songrecommendationbotserver.onrender.com", {track, artist, typeRec});
         setResponse(res.data);
       }
       else if (typeRec === "Different") {

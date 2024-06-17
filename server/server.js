@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post('/run', (req, res) => {
+app.post('/', (req, res) => {
     const {track, artist} = req.body;
     if(!track || !artist) {
         return res.send('Song and artist both required.').status(400);
