@@ -45,7 +45,7 @@ function App() {
 
       setResponse("Recommending...");
       if (typeRec === "Same") {
-        const res = await axios.post("http://localhost:3001/run", {track, artist, typeRec});
+        const res = await axios.post("https://kt3iblkmzmg5sl6z4rhta4t6pu0tityn.lambda-url.eu-north-1.on.aws/run", {track, artist, typeRec});
         setResponse(res.data);
       }
       else if (typeRec === "Different") {
