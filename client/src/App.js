@@ -45,7 +45,7 @@ function App() {
 
       setResponse("Recommending...");
       if (typeRec === "Same") {
-        const res = await axios.post("http://16.170.236.111:3001/run", {track, artist, typeRec});
+        const res = await axios.post("http://localhost:3001/run", {track, artist, typeRec});
         setResponse(res.data);
       }
       else if (typeRec === "Different") {
