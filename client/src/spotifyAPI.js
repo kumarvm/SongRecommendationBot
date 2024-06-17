@@ -69,5 +69,3 @@ const getRecommendations = async (seedTrack, artist, limit = 5) => {
   };
 
 export {searchTrack, getRecommendations};
-
-  
