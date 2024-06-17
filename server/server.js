@@ -4,7 +4,10 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+
+if (process.env.DEVELOPMENT) {
+    app.use(cors());
+}
 
 app.post('/run', (req, res) => {
     const {track, artist} = req.body;
@@ -20,6 +23,8 @@ app.post('/run', (req, res) => {
     });
 });
 
-app.listen(3001, () => {
-    console.log('Server running on port 3001');
-});
+if (process.env.DEVELOPMENT) {
+    app.listen(3001, () => {
+        console.log('Server running on port 3001');
+    });
+}
