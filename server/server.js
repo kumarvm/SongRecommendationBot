@@ -4,10 +4,8 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
-if (process.env.DEVELOPMENT) {
-    app.use(cors());
-}
 
 app.post('/run', (req, res) => {
     const {track, artist} = req.body;
