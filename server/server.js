@@ -9,6 +9,10 @@ if (process.env.DEVELOPMENT) {
     app.use(cors());
 }
 
+app.get('/', (req, res) => {
+    res.send("Hello World");
+});
+
 app.post('/run', (req, res) => {
     const {track, artist} = req.body;
     if(!track || !artist) {
