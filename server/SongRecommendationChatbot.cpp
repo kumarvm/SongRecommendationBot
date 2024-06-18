@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//Song struct
 typedef struct Song {
     string track_name;
     string artist;
@@ -23,6 +24,7 @@ typedef struct Song {
     double valence;
 } Song;
 
+//Error handler
 void error_handler(int rc, string message, sqlite3* db) {
     if (rc) {
         cerr << message << endl;
@@ -31,6 +33,8 @@ void error_handler(int rc, string message, sqlite3* db) {
     }
 }
 
+//Since tempo is not between 0 and 1, this function scales it between an interval [0,1].
+//Used prepare statements to prevent against SQL injection attacks.
 double scale_tempo() {
     sqlite3* db;
     int rc = sqlite3_open("Songs.db", &db);
@@ -64,6 +68,7 @@ double scale_tempo() {
     return max, min;
 }
 
+//Fills the Song struct with data from the database
 Song fill_data(Song song, sqlite3_stmt* stmt, double max, double min) {
     song.track_name = (const char*)(sqlite3_column_text(stmt, 1));
     song.artist = (const char*)(sqlite3_column_text(stmt, 2));
@@ -82,6 +87,7 @@ Song fill_data(Song song, sqlite3_stmt* stmt, double max, double min) {
     return song;
 }
 
+//Gets input song and artist from command line arguments and fills the corresponding Song struct.
 Song get_input_song(int argc, char* argv[], sqlite3* db) {
     string input_song = argv[1];
     string artist = argv[2];
@@ -116,6 +122,7 @@ Song get_input_song(int argc, char* argv[], sqlite3* db) {
     return song;
 }
 
+//Returns a vector of Song structs, each struct filled with its respective data from the database.
 vector<Song> get_dataset(sqlite3* db) {
     sqlite3_stmt* stmt;
     const char* sql = "SELECT * FROM Songs;";
@@ -140,6 +147,7 @@ vector<Song> get_dataset(sqlite3* db) {
     return dataset;
 }
 
+//Calculates the distance between each song vector
 double euclidean_distance(const Song s1, const Song s2) {
     double distance = 0.0;
     distance += pow(s1.acousticness - s2.acousticness, 2);
@@ -164,6 +172,7 @@ double euclidean_distance(const Song s1, const Song s2) {
     return sqrt(distance);
 }
 
+//Uses the Euclidean distances to return k-nearest neighbours (ie. the recommendations)
 vector<string> recommend_songs(const Song input_song, const vector<Song> dataset, int k) {
     vector<pair<double, string>> distances;
     vector<string> seenTracks;

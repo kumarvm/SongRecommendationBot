@@ -1,11 +1,14 @@
 import sqlite3
 import csv
 
+#Connects to SQLite database
 conn = sqlite3.connect("Songs.db")
 c = conn.cursor()
 
+#Creates table if it doesn't exist
 c.execute('CREATE TABLE IF NOT EXISTS songs (id INTEGER PRIMARY KEY, track_name TEXT, artist TEXT, genre TEXT, acousticness REAL, danceability REAL, energy REAL, song_key TEXT, liveness REAL, loudness REAL, mode TEXT, speechiness REAL, tempo REAL, valence REAL)')
 
+#Reads CSV file and fills database
 with open('SpotifyFeatures.csv', newline='') as csvFile:
     reader = csv.reader(csvFile)
     next(reader)

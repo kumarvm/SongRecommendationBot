@@ -10,6 +10,7 @@ function App() {
   const [response, setResponse] = useState('');
   const [songImage, setSongImage] = useState('');
 
+  //Finds and displays album cover based on song and artist typed.
   useEffect(() => {
     const fetchSongImage = async () => {
       if (track && artist) {
@@ -36,7 +37,9 @@ function App() {
 
 
   const handleSubmit = async (event) => {
+    //Prevents the default action of a form being submitted.
     event.preventDefault();
+
     try {
       if (!typeRec) {
         setResponse("Please select a type of recommendation.");
@@ -45,10 +48,13 @@ function App() {
 
       setResponse("Recommending...");
       if (typeRec === "Same") {
+        /* Sends a request to the server which calls the C++ backend and 
+        returns the stdout of the C++ as the response to this post call. */
         const res = await axios.post("http://localhost:3001/run", {track, artist, typeRec});
         setResponse(res.data);
       }
       else if (typeRec === "Different") {
+        //API call via spotifyAPI.js
         const res = await getRecommendations(track, artist);
         const trackNames = res.tracks.map(track => track.name);
         const result = trackNames.join('\n');

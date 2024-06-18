@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//Client ID and client secret can be changed to your own.
 const SPOTIFY_CLIENT_ID = '9c90ab47a743489dbfef24be7d7a88ed';
 const SPOTIFY_CLIENT_SECRET = '1f13ed6b307c459a95194e39692fcf8a';
 const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
@@ -9,6 +10,7 @@ const SPOTIFY_RECOMMENDATIONS_URL = 'https://api.spotify.com/v1/recommendations'
 let accessToken = '';
 let tokenExpiryTime = 0;
 
+//Gets access token for Spotify API
 const getAccessToken = async () => {
   if (!accessToken || Date.now() >= tokenExpiryTime) {
     const response = await axios.post(SPOTIFY_TOKEN_URL, 'grant_type=client_credentials', {
@@ -22,6 +24,7 @@ const getAccessToken = async () => {
   }
 };
 
+//Gets track object.
 const searchTrack = async (track, artist) => {
   await getAccessToken();
   const response = await axios.get(SPOTIFY_SEARCH_URL, {
@@ -37,6 +40,7 @@ const searchTrack = async (track, artist) => {
   return response.data.tracks.items[0];
 };
 
+//Gets the track ID.
 const searchTrackID = async (track, artist) => {
     await getAccessToken();
     const response = await axios.get(SPOTIFY_SEARCH_URL, {
@@ -49,10 +53,11 @@ const searchTrackID = async (track, artist) => {
         limit: 1,
       },
     });
-    console.log(response.data)
+
     return response.data.tracks.items[0].id;
   };
 
+//Using the track ID as the seed track, this calls the APIs recommendations function.
 const getRecommendations = async (seedTrack, artist, limit = 5) => {
     await getAccessToken();
     const seedTrackID = await searchTrackID(seedTrack, artist);
@@ -65,6 +70,7 @@ const getRecommendations = async (seedTrack, artist, limit = 5) => {
         limit: limit,
       },
     });
+
     return response.data;
   };
 

@@ -6,16 +6,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send("Hello World!");
-});
-
 app.post('/run', (req, res) => {
     const {track, artist} = req.body;
     if(!track || !artist) {
         return res.send('Song and artist both required.').status(400);
     }
 
+    //Calling C++ backend
     exec(`./Chatbot "${track.trim()}" "${artist.trim()}"`, (error, stdout) => {
         if (error) {
             return res.send('Song not found. Make sure both track and artist are correctly spelt. Otherwise, select \'Different Artist\' but note that the recommendations may not be by the same artist.').status(500);
