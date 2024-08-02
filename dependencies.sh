@@ -5,3 +5,4 @@ npm i axios
 
 cd ../server
 npm i express cors child_process
+npm install -g forever
