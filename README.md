@@ -23,19 +23,12 @@ Firstly open the project in the terminal (or IDE) and make sure all dependencies
 
 Note that you only have to run the dependencies script once ie. when you have initially forked this repo.
 
-After that, run the run_server shell script to start the server:
-```bash
-./run_server.sh
-```
-
-Once the server is running, click the link found with this repo.
-
-(To stop the server, type Ctrl+C in the terminal.)
+Note that the node module forever was used to run server.js indefinitely.
 
 ## Space for improvements
-AWS Amplify was used to deploy the React app, however currently the Node.js server is not deployed. AWS EC2, AWS Lambda and AWS Elastic Beanstalk can be used to try and deploy the server however take care to note when the server needs to be converted to serverless (as is the case for AWS Lambda).
-
 Additional features to the website can be added: same album recommendations, same/different genres, recommendations based on the metrics found in the CSV file (and the API).
+
+Website layout/design can also be improved.
 
 ## Links
 Website (deployed on AWS Amplify): https://main.d3mx11xvagsje9.amplifyapp.com/
